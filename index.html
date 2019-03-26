@@ -22,9 +22,45 @@
   header{ border-bottom: 2px solid #2092ad; }
   .tool-sct{ background: #ebebeb; }
   .map{ margin:40px; border:2px solid #2092ad;  }
-  .map-detail { background: #fff; padding:30px; margin-left:40px;}
+  .map-detail { background: #fff; padding:30px; margin:40px;}
   .w3-tiny{margin:40px 40px 0;}
-  
+  .slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
   </style>
   <!--style -->
 </head>
@@ -67,26 +103,60 @@
   <section class="tool-sct">
     <div class="container">
       <div class="row">
-      <div class="col-sm-6">
-      <div class="w3-light-grey w3-tiny">
-    <div class="w3-container w3-green" style="width:50%">50%</div>
+        <div class="col-sm-6">
+          <div class="w3-light-grey w3-tiny">
+            <label>Transaction Score</label>
+            <div class="slidecontainer">
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="w3-light-grey w3-tiny">
+            <label>Member Score</label>
+          <div class="slidecontainer">
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
        </div>
-         </div>
-          <div class="col-sm-6">
-      <div class="w3-light-grey w3-tiny">
-    <div class="w3-container w3-green" style="width:50%">50%</div>
-       </div>
-         </div>
-         <div class="col-sm-12">
-         <div class="map">
-         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d16053745.45797888!2d78.28850269889882!3d10.782836439122145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1553538574871" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>         </div></div>
-         <div class="col-sm-6">
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+           <div class="map">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d16053745.45797888!2d78.28850269889882!3d10.782836439122145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1553538574871" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>         </div>
+        </div>
+         <div class="col-sm-4">
              <div class="map-detail">
              <h5>Top 5 Countries</h5>
-             <table class="table table-bordered"><tr><td>Transcation score</td><td>USA (400) India(300) UK (230) China(200)</td></tr>
-             <tr><td>Member score</td><td>China 200</td></tr></table>
+             <table class="table table-bordered">
+                <tr>
+                  <th>#</th>
+                  <th>Transaction Score</th>
+                  <th>Member Score</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>USA (400)</td>
+                  <td>China 200</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>India(300)</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>UK (230)</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>China(200)</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
              </div>
          </div>
+       </div>
       </div>
     </div>
   </section>
