@@ -21,9 +21,17 @@
   .ht-top ul li{ list-style-type:none; padding:16px 10px 0; display: inline-block; }
   .ht-top ul li a{ color:#666; }
   header{ border-bottom: 2px solid #2092ad; }
-  .tool-sct{ background: #ebebeb; }
-  .map{ margin-top:20px; border:2px solid #2092ad;  }
-  
+  .tool-sct{
+    background: #ebebeb;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 58px);
+    top: 58px;
+}
+  .map{ margin-top:20px; border:2px solid #2092ad;position: relative;height: calc(100% - 102px)  }
+  .map #googleMap{
+    height: 100%!important;
+  }
   .w3-tiny{margin:40px 40px 0;}
   .slidecontainer {
   width: 100%;
@@ -122,7 +130,13 @@ tbody td div{
 }
 .container{
   position: relative;
+  height: 100%;
 }
+.container .map-container{
+  position: relative;
+  height: 100%;
+}
+
 .slider_container{
   position: absolute;
   width: 70%;
@@ -143,42 +157,43 @@ tbody td div{
   top:10px;
 }
 .morebubbledetails{
-    width: 300px;
+    width: 500px;
     height: 250px;
     margin: 0 auto;
     position: relative;
+    overflow: hidden;
+    padding-top: 40px;
 }
 .morebubbledetails .bubble{
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border: 2px solid;
+  border: 2px solid #000;
   position: absolute;
   background: #fff;
   color: #fff;
 }
 .morebubbledetails .bubble.bubble0{
-  top: 0;
-  left:0;
+  top: 65px;
+  right:75px;
 }
 .morebubbledetails .bubble.bubble1{
   top: 0;
   right:0;
+  left: 0;
+  margin: auto;
 }
 .morebubbledetails .bubble.bubble2{
-  bottom: 0;
-  left:0;
+  top: 65px;
+  left:75px;
 }
 .morebubbledetails .bubble.bubble3{
   bottom: 0;
-  right:0;
+  left:0;
 }
 .morebubbledetails .bubble.bubble4{
-  top: 0;
-  left:0;
   right:0;
   bottom: 0;
-  margin:auto;
 }
 .morebubbledetails .bubble.greenbubble{
 background:green;
@@ -205,17 +220,24 @@ background:#ffbf00;
   
 }
 .crossLines{
-    height: 2px;
-    background: #000;
-    top: 125px;
-    position: absolute;
-    width: 100%;
+    
 }
 .crossLines.crossLine1{
-    transform: rotate(40deg); 
+    height: 2px;
+    background: #000;
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
 }
 .crossLines.crossLine2{
-    transform: rotate(-40deg);  
+    width: 445px;
+    height: 445px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
   </style>
   <!--style -->
@@ -233,7 +255,7 @@ background:#ffbf00;
         <div class="col-sm-6">
           <div class="w3-light-grey w3-tiny">
             <div class="slidecontainer">
-              <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.transaction" id="myRange1">
+              <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.transaction" id="myRange1" ng-change="filterMap();">
               <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i>
               <div class="sliderlabel">
                 <label>0</label>
@@ -254,7 +276,7 @@ background:#ffbf00;
         <div class="col-sm-6">
           <div class="w3-light-grey w3-tiny">
           <div class="slidecontainer">
-              <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.member" id="myRange2">
+              <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.member" id="myRange2" ng-change="filterMap();">
               <i class="tooltipTag" data-toggle="tooltip" title="About Member score">?</i>
               <div class="sliderlabel">
                 <label>0</label>
@@ -273,37 +295,34 @@ background:#ffbf00;
        </div>
       </div>
       </div>        
-      <div class="row">
-        <div class="col-sm-12">
-           <div class="map">
-           <div id="googleMap" style="width:100%;height:400px;"></div>           </div>
-        </div>
-         <div class="col-sm-12">
-             <div class="map-detail">
-             <h5 class="topcoutryhead">Top 5 Countries</h5>
-             <table class="table table-bordered">
-                <tr>
-                  <td width="20%">Transaction Score <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i></td>
-                  <td width="80%">
-                    <div>USA (400)</div>
-                    <div>India (300)</div>
-                    <div>UK (230)</div>
-                    <div>France (200)</div>
-                    <div>Mexico (200)</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Member Score <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i></td>
-                  <td>
-                    <div>China (200)</div>
-                    <div>UK (455)</div>
-                    <div>China (98)</div>
-                    <div>Canada (670)</div>
-                    <div>Italy (670)</div></td>
-                </tr>
-              </table>
-             </div>
-         </div>
+      <div class="row map-container">
+          <div class="map">
+            <div id="googleMap" style="width:100%;height:400px;"></div>           
+          </div>
+          <div class="map-detail">
+           <h5 class="topcoutryhead">Top 5 Countries</h5>
+           <table class="table table-bordered">
+              <tr>
+                <td width="20%">Transaction Score <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i></td>
+                <td width="80%">
+                  <div>USA (400)</div>
+                  <div>India (300)</div>
+                  <div>UK (230)</div>
+                  <div>France (200)</div>
+                  <div>Mexico (200)</div>
+                </td>
+              </tr>
+              <tr>
+                <td>Member Score <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i></td>
+                <td>
+                  <div>China (200)</div>
+                  <div>UK (455)</div>
+                  <div>China (98)</div>
+                  <div>Canada (670)</div>
+                  <div>Italy (670)</div></td>
+              </tr>
+            </table>
+           </div>
       </div>
     </div>
   </section>
@@ -359,43 +378,43 @@ background:#ffbf00;
         });
 
           $scope.selectedData = {};
-
+          $scope.markers = [];
 
           $scope.mockData = [
                   {
                     "MAINADDRESS_COUNTRY":"North America", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 6, "FIVEMIN":20, "ONEDAY":40, "ONEWEEK": 80, "ONEMONTH": 350, "THREEMONTH": 800, "LATITUDE": 37.588119, "LONGITUDE": -95.370119}, 
+                      {"FRAUDSCORE": 7, "FIVEMIN":20, "ONEDAY":40, "ONEWEEK": 80, "ONEMONTH": 350, "THREEMONTH": 800, "LATITUDE": 37.588119, "LONGITUDE": -95.370119}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 5, "FIVEMIN":190, "ONEDAY":270, "ONEWEEK": 400, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 42.948381, "LONGITUDE": -115.049012}
+                      {"FRAUDSCORE": 7, "FIVEMIN":190, "ONEDAY":270, "ONEWEEK": 400, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 42.948381, "LONGITUDE": -115.049012}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"South Africa", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 4, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": -7.874265, "LONGITUDE": 16.377877}, 
+                      {"FRAUDSCORE": 9, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": -7.874265, "LONGITUDE": 16.377877}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 9,  "FIVEMIN":35, "ONEDAY":47, "ONEWEEK": 97, "ONEMONTH": 200, "THREEMONTH": 500, "LATITUDE": -8.570158, "LONGITUDE": 32.542681}
+                      {"FRAUDSCORE": 7,  "FIVEMIN":35, "ONEDAY":47, "ONEWEEK": 97, "ONEMONTH": 200, "THREEMONTH": 500, "LATITUDE": -8.570158, "LONGITUDE": 32.542681}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"India", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 2,  "FIVEMIN":105, "ONEDAY":170, "ONEWEEK": 240, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 28.777289, "LONGITUDE": 76.117372}, 
+                      {"FRAUDSCORE": 9,  "FIVEMIN":105, "ONEDAY":170, "ONEWEEK": 240, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 28.777289, "LONGITUDE": 76.117372}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 4,  "FIVEMIN":600, "ONEDAY":650, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 14.445319, "LONGITUDE": 78.225824}
+                      {"FRAUDSCORE": 7,  "FIVEMIN":600, "ONEDAY":650, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 14.445319, "LONGITUDE": 78.225824}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"China", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 1, "FIVEMIN":600, "ONEDAY":640, "ONEWEEK": 750, "ONEMONTH": 800, "THREEMONTH": 1600, "LATITUDE": 34.818313, "LONGITUDE": 88.334275}, 
+                      {"FRAUDSCORE": 9, "FIVEMIN":600, "ONEDAY":640, "ONEWEEK": 750, "ONEMONTH": 800, "THREEMONTH": 1600, "LATITUDE": 34.818313, "LONGITUDE": 88.334275}, 
                     "MEMBER_DATA":
                       {"FRAUDSCORE": 9,  "FIVEMIN":300, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 30.377614, "LONGITUDE": 100.633583}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"Mexico", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 6, "FIVEMIN":100, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 23.634501, "LONGITUDE": -102.552788}, 
+                      {"FRAUDSCORE": 7, "FIVEMIN":100, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 23.634501, "LONGITUDE": -102.552788}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 2, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": 23.110681, "LONGITUDE": -101.143643}
+                      {"FRAUDSCORE": 7, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": 23.110681, "LONGITUDE": -101.143643}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"Canada", 
@@ -407,18 +426,21 @@ background:#ffbf00;
                   {
                     "MAINADDRESS_COUNTRY":"Italy", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 3,  "FIVEMIN":300, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
+                      {"FRAUDSCORE": 7,  "FIVEMIN":300, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 8, "FIVEMIN":600, "ONEDAY":700, "ONEWEEK": 800, "ONEMONTH": 900, "THREEMONTH": 1000, "LATITUDE": 42.452088, "LONGITUDE": 11.983245}
+                      {"FRAUDSCORE": 9, "FIVEMIN":600, "ONEDAY":700, "ONEWEEK": 800, "ONEMONTH": 900, "THREEMONTH": 1000, "LATITUDE": 42.452088, "LONGITUDE": 11.983245}
                   }
               ];
 
 
-          $scope.filters = {transaction: 10, member: 10};
+          $scope.filters = {transaction: 7, member: 7};
 
           $scope.filterMap = function(){
-            setMapOnAll(null);
-            $scope.plotMarker();
+            for (var i = 0; i < $scope.markers.length; i++) {
+              $scope.markers[i].setMap(null);
+            }
+            $scope.markers = [];
+            //$scope.plotMarker();
           };
 
 
@@ -447,6 +469,8 @@ background:#ffbf00;
                         icon: pinSymbol(labelColor)
                     });
 
+                    $scope.markers.push(marker);
+
                     google.maps.event.addListener(marker, "click", function (e) {
                         $("#myModal").modal('show');
                         $scope.selectedData = this;
@@ -464,7 +488,7 @@ background:#ffbf00;
                         labelColor2 = 'green';
                     }
 
-                    var marker = new MarkerWithLabel({
+                    var marker2 = new MarkerWithLabel({
                         position: new google.maps.LatLng(v.MEMBER_DATA.LATITUDE, v.MEMBER_DATA.LONGITUDE),
                         map: map,
                         ind: v,
@@ -476,7 +500,9 @@ background:#ffbf00;
                         icon: pinSymbol(labelColor2)
                     });
 
-                    google.maps.event.addListener(marker, "click", function (e) {
+                    $scope.markers.push(marker2);
+
+                    google.maps.event.addListener(marker2, "click", function (e) {
                         $("#myModal").modal('show');
 
                         $scope.selectedData = this;
