@@ -126,7 +126,10 @@
 tbody td div{
   text-transform: uppercase;
   display: inline-block;
-  width:150px;
+  width:170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .container{
   position: relative;
@@ -305,21 +308,13 @@ background:#ffbf00;
               <tr>
                 <td width="20%">Transaction Score <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i></td>
                 <td width="80%">
-                  <div>USA (400)</div>
-                  <div>India (300)</div>
-                  <div>UK (230)</div>
-                  <div>France (200)</div>
-                  <div>Mexico (200)</div>
+                  <div ng-repeat="tr in topTransaction track by $index" ng-if="$index < 5">{{tr}}</div>
                 </td>
               </tr>
               <tr>
                 <td>Member Score <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i></td>
                 <td>
-                  <div>China (200)</div>
-                  <div>UK (455)</div>
-                  <div>China (98)</div>
-                  <div>Canada (670)</div>
-                  <div>Italy (670)</div></td>
+                  <div ng-repeat="tr in topMember track by $index" ng-if="$index < 5">{{tr}}</div>
               </tr>
             </table>
            </div>
@@ -368,7 +363,7 @@ background:#ffbf00;
 </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkGAMLTnhCQfCHuucSQCdoKDaxzfFqEro&sensor=false&libraries=geometry,places&ext=.js"></script>
-  <script type="text/javascript" src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
+  <script type="text/javascript" src="js/markerwithlabel.js"></script>
   <script>
     var map;
     angular.module('todoApp', [])
@@ -440,76 +435,128 @@ background:#ffbf00;
               $scope.markers[i].setMap(null);
             }
             $scope.markers = [];
-            //$scope.plotMarker();
+            $scope.plotMarker();
           };
 
+          $scope.topTransaction = [];
+          $scope.topMember = [];
 
           $scope.plotMarker = function(){
+              $scope.topTransaction = [];
+              $scope.topMember = [];
+              var labelAnchor = new google.maps.Point(7, 45);
+              var zoomMap =false;
+              var zoomFlag = true;
+              if($scope.filters.transaction > 7 || $scope.filters.member > 7){
+                var zoomMap = true;
+                labelAnchor = new google.maps.Point(7, 65);
+              } else {
+                map.setCenter(new google.maps.LatLng(38.694085,-1.710901));
+                map.setZoom(2);
+              }
+
               angular.forEach($scope.mockData, function(v,i){
 
                     var labelColor;
 
-                    if(v.TRANSACTION_DATA.FIVEMIN >= 500){
-                        labelColor = 'red';
-                    } else if(v.TRANSACTION_DATA.FIVEMIN >= 100){
-                        labelColor = '#ffbf00';
-                    } else{
-                        labelColor = 'green';
+                    if($scope.filters.transaction >= 7 && $scope.filters.transaction <= v.TRANSACTION_DATA.FRAUDSCORE){
+                        
+                        if(zoomMap && zoomFlag){
+                            map.setCenter(new google.maps.LatLng(v.TRANSACTION_DATA.LATITUDE, v.TRANSACTION_DATA.LONGITUDE));
+                            map.setZoom(5);
+                            zoomFlag = false;
+                        }
+
+                        $scope.topTransaction.push(v.MAINADDRESS_COUNTRY+' ('+v.TRANSACTION_DATA.FIVEMIN+')');
+
+                        if(v.TRANSACTION_DATA.FIVEMIN >= 500){
+                            labelColor = 'red';
+                        } else if(v.TRANSACTION_DATA.FIVEMIN >= 100){
+                            labelColor = '#ffbf00';
+                        } else{
+                            labelColor = 'green';
+                        }
+
+                        var marker = new MarkerWithLabel({
+                            position: new google.maps.LatLng(v.TRANSACTION_DATA.LATITUDE, v.TRANSACTION_DATA.LONGITUDE),
+                            map: map,
+                            ind: v,
+                            selType: "TRANSACTION_DATA",
+                            labelContent: v.TRANSACTION_DATA.FIVEMIN,
+                            labelAnchor: labelAnchor,
+                            labelClass: "labels", // the CSS class for the label
+                            labelInBackground: false,
+                            icon: pinSymbol(labelColor, zoomMap ? 2 : 1.3)
+                        });
+
+                        $scope.markers.push(marker);
+
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            $("#myModal").modal('show');
+                            $scope.selectedData = this;
+                            $scope.$apply();
+                        });
                     }
-
-                    var marker = new MarkerWithLabel({
-                        position: new google.maps.LatLng(v.TRANSACTION_DATA.LATITUDE, v.TRANSACTION_DATA.LONGITUDE),
-                        map: map,
-                        ind: v,
-                        selType: "TRANSACTION_DATA",
-                        labelContent: v.TRANSACTION_DATA.FIVEMIN,
-                        labelAnchor: new google.maps.Point(7, 65),
-                        labelClass: "labels", // the CSS class for the label
-                        labelInBackground: false,
-                        icon: pinSymbol(labelColor)
-                    });
-
-                    $scope.markers.push(marker);
-
-                    google.maps.event.addListener(marker, "click", function (e) {
-                        $("#myModal").modal('show');
-                        $scope.selectedData = this;
-                        $scope.$apply();
-                    });
-
 
                     var labelColor2;
+                    if($scope.filters.member >= 7 && $scope.filters.member <= v.MEMBER_DATA.FRAUDSCORE){
+                        
+                        if(zoomMap && zoomFlag){
+                            map.setCenter(new google.maps.LatLng(v.MEMBER_DATA.LATITUDE, v.MEMBER_DATA.LONGITUDE));
+                            map.setZoom(5);
+                            zoomFlag = false;
+                        }
 
-                    if(v.MEMBER_DATA.FIVEMIN >= 500){
-                        labelColor2 = 'red';
-                    } else if(v.MEMBER_DATA.FIVEMIN >= 100){
-                        labelColor2 = '#ffbf00';
-                    } else{
-                        labelColor2 = 'green';
+                        $scope.topMember.push(v.MAINADDRESS_COUNTRY+' ('+v.MEMBER_DATA.FIVEMIN+')');
+
+                        if(v.MEMBER_DATA.FIVEMIN >= 500){
+                            labelColor2 = 'red';
+                        } else if(v.MEMBER_DATA.FIVEMIN >= 100){
+                            labelColor2 = '#ffbf00';
+                        } else{
+                            labelColor2 = 'green';
+                        }
+
+                        var marker2 = new MarkerWithLabel({
+                            position: new google.maps.LatLng(v.MEMBER_DATA.LATITUDE, v.MEMBER_DATA.LONGITUDE),
+                            map: map,
+                            ind: v,
+                            selType: "MEMBER_DATA",
+                            labelContent: v.MEMBER_DATA.FIVEMIN,
+                            labelAnchor: labelAnchor,
+                            labelClass: "labels", // the CSS class for the label
+                            labelInBackground: false,
+                            icon: pinSymbol(labelColor2, zoomMap ? 2 : 1.3)
+                        });
+
+                        $scope.markers.push(marker2);
+
+                        google.maps.event.addListener(marker2, "click", function (e) {
+                            $("#myModal").modal('show');
+
+                            $scope.selectedData = this;
+                            $scope.$apply();
+
+                        });
                     }
-
-                    var marker2 = new MarkerWithLabel({
-                        position: new google.maps.LatLng(v.MEMBER_DATA.LATITUDE, v.MEMBER_DATA.LONGITUDE),
-                        map: map,
-                        ind: v,
-                        selType: "MEMBER_DATA",
-                        labelContent: v.MEMBER_DATA.FIVEMIN,
-                        labelAnchor: new google.maps.Point(7, 65),
-                        labelClass: "labels", // the CSS class for the label
-                        labelInBackground: false,
-                        icon: pinSymbol(labelColor2)
-                    });
-
-                    $scope.markers.push(marker2);
-
-                    google.maps.event.addListener(marker2, "click", function (e) {
-                        $("#myModal").modal('show');
-
-                        $scope.selectedData = this;
-                        $scope.$apply();
-
-                    });
               });
+
+              $scope.topTransaction.sort(function(a1, b1){
+                a = a1.replace("(", "").replace(")", "").split(" ")[1];
+                b = b1.replace("(", "").replace(")", "").split(" ")[1];
+                return b-a
+              });
+
+              $scope.topMember.sort(function(a1, b1){
+                a = a1.replace("(", "").replace(")", "").split(" ")[1];
+                b = b1.replace("(", "").replace(")", "").split(" ")[1];
+                return b-a
+              });
+
+
+              if(!$scope.$$phase) {
+                $scope.$apply();
+              }
           };
 
 
@@ -529,14 +576,14 @@ background:#ffbf00;
               document.getElementById("log").innerHTML += h + "<br />";
           }
 
-          function pinSymbol(color) {
+          function pinSymbol(color, scale) {
               return {
                   path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
                   fillColor: color,
                   fillOpacity: 1,
                   strokeColor: '#000',
                   strokeWeight: 2,
-                  scale: 2
+                  scale: scale
               };
           }
           google.maps.event.addDomListener(window, 'load', initMap);
