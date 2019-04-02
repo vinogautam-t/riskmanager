@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  .navbar-inverse{background: #fff; border-color: #fff; border-radius:none;}
+  .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{color:#2092ad;}
+  .navbar-inverse .navbar-nav > li > a{color:#47a8c0;}
+  .navbar-nav > li{padding:7px 0;}
+  .navbar{ margin-bottom:0; }
+  .ht-top ul{padding:0;}
+  .ht-top{ border-bottom:1px solid #ccc; } 
+  .ht-top ul li{ list-style-type:none; padding:16px 10px 0; display: inline-block; }
+  .ht-top ul li a{ color:#666; }
+  header{ border-bottom: 2px solid #2092ad; }
+  .tool-sct{ background: #ebebeb; }
+  .map{ margin:40px; border:2px solid #2092ad;  }
+  .map-detail {
+    margin-left: -15px;
+    margin-top: 40px;
+    padding: 5px;
+}
+  .w3-tiny{margin:40px 40px 0;}
+  .slidecontainer {
+  width: 100%;
+}
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+.sliderlabel{
+  white-space: nowrap;
+  margin-top: 10px;
+}
+.sliderlabel label {
+    display: inline-block;
+    width: calc(100% - 91%);
+}
+.labels {
+    color: white;
+    text-align: center;
+    display: block;
+}
+.tooltipTag {
+    display: inline-block;
+    padding: 1px;
+    background: #459AAB;
+    color: #fff;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.topcoutryhead{
+    background: #459AAB;
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+}
+thead{
+  background:#fff;
+  color: #033575;
+  font-size: 12px;
+}
+tbody{
+  background: #fff;
+}
+tbody td div{
+  color:#459AAB;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.page-container {
+    margin: 20px;
+}
+.welcome-container {
+    color: grey;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 10px; 
+    padding: 10px;
+    border-bottom: 1px solid grey;
+}
+.table-header {
+    color: white;
+    width: 100%;
+    background: #033575;
+    padding: 10px;
+    margin-bottom: 0;
+}
+.custom-table th, .custom-table td{
+    border-left: 0 white solid !important;
+    border-right: 0 white solid !important;
+    color: #033575;
+}
+.align-center {
+    text-align: center;
+}
+.alternate {
+    background: #dedede;
+}
+.right-container {
+    
+}
+.info-container {
+    padding: 10px;
+    border: 1px solid #dedede;
+    color: #033575;
+    font-size: 12px;
+}
+.no-border, .no-border td {
+    border: 0px white solid !important;
+}
+
+.event-hierarcy {
+
+}
+
+.event-hierarcy .header {
+
+}
+
+  </style>
+  <!--style -->
+</head>
+<body>
+<div class="ht-top">
+<div class="container">
+      <div class="logo col-sm-9"> <img src="logika-logo.jpeg"></div>
+      <div class="text-right col-sm-3"><ul class=""><li><a><i class="fas fa-user-circle"></i> NAME</a></li><li><a><i class="fas fa-briefcase"></i></a></li><li><a><i class="fas fa-cog"></i></a></li></ul></div>
+  </div>
+</div>
+<!-- hreader -->
+<header>
+<div class="container">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>      
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#">HOME</a></li>
+        <li> <a href="#">REWARDS NIGHT</a>        
+        </li>
+        <li><a href="#">LOGIN FREQUENCY</a></li>
+        <li><a href="#">WATCH LIST</a></li>
+        <li><a href="#">BLACK LIST</a></li>
+        <li><a href="">RISK</a></li>
+      </ul>     
+    </div>
+  </div>
+</nav>
+<!-- nav -->
+</div>
+</header>
+<!-- hreader -->  
+
+<div class='page-container'>
+    <h2 class='welcome-container'>WELCOME CHARLIE</h2>
+    <div class='row'>
+        <div class='col-lg-7'>
+            <h4 class='table-header'>TRANSATION TABLE</h4>
+            <table class="table table-bordered custom-table">
+                <thead>
+                    <tr>
+                    <th>TRANSACTION TYPE</th>
+                    <th>AVERAGE SCORE</th>
+                    <th>TRANSACTION COUNT</th>
+                    <th>MEMBER COUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rerward Reservation Night</td>
+                        <td class='align-center'>7</td>
+                        <td class='align-center'>480</td>
+                        <td class='align-center'>520</td>
+                    </tr>
+                    <tr class='alternate'>
+                        <td>Profile Change</td>
+                        <td class='align-center'>6</td>
+                        <td class='align-center'>490</td>
+                        <td class='align-center'>560</td>
+                    </tr>
+                    <tr>
+                        <td>Fraudlant Email</td>
+                        <td class='align-center'>5</td>
+                        <td class='align-center'>340</td>
+                        <td class='align-center'>490</td>
+                    </tr>
+                    <tr class='alternate'>
+                        <td>Phone Number Change</td>
+                        <td class='align-center'>380</td>
+                        <td class='align-center'>330</td>
+                        <td class='align-center'>375</td>
+                    </tr>
+                    <tr>
+                        <td>Digital Signature</td>
+                        <td class='align-center'>360</td>
+                        <td class='align-center'>290</td>
+                        <td class='align-center'>190</td>
+                    </tr>
+                </tbody>
+            </table>    
+        </div>
+        <div class='col-lg-4 col-lg-offset-1'>
+            <div class='right-container'>
+                <h4 class='table-header align-center' style="    margin-top: 0;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;">TRANSATION DETAILS</h4>
+                <div class='info-container'>
+                    <p>Customer Number : 742066000</p>
+                    <p>Customer Score : 7</p>
+                    <div class='event-hierarcy'>
+                        <table class="table table-bordered custom-table">
+                            <thead>
+                                <tr class='alternate'>
+                                <th>Event hierarchy</th>
+                                <th>TS</th>
+                                <th>MS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class='no-border'>
+                                    <td><i class='fa fa-envelope'></i> Email Change</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class='no-border'>
+                                    <td><i class='fa fa-key'></i> Password Change</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class='no-border'>
+                                    <td><i class='fa fa-mobile'></i> Phone Number Change</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class='no-border'>
+                                    <td><i class='fa fa-home'></i> Address Change</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class='no-border'>
+                                    <td><i class='fa fa-sitemap'></i> Re-weared Night Reservation</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Fraud happened</td>
+                                    <td><input type='radio' checked value='Y' name='Y' > <b>Y</b></td>
+                                    <td><input type='radio'  value='N' name='N' > <b>N</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Action</td>
+                                    <td><input type='radio' checked value='Y' name='Y' > <b>Y</b></td>
+                                    <td><input type='radio'  value='N' name='N' > <b>N</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class='row'>
+                                <div class='col-lg-offset-1 col-lg-7'>
+                                    Number of customers with similar pattern
+                                </div>
+                                <div class='col-lg-4'>
+                                    320
+                                </div>
+                            </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
