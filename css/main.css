@@ -9,3 +9,296 @@
 body{
 	font-family: ProximaNova-Regular;
 }
+.navbar-inverse{background: #fff; border-color: #fff; border-radius:none;}
+  .navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover{color:#2092ad;}
+  .navbar-inverse .navbar-nav > li > a{color:#47a8c0;}
+  .navbar-nav > li{padding:7px 0;}
+  .navbar{ margin-bottom:0; }
+  .ht-top ul{padding:0;}
+  .ht-top{ border-bottom:4px solid #aaa; } 
+  .ht-top ul li{ list-style-type:none; padding:16px 10px 0; display: inline-block; }
+  .ht-top ul li a{ color:#666; }
+  header{ border-bottom: 2px solid #2092ad; }
+  .tool-sct{
+    background: #ebebeb;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 58px);
+    top: 58px;
+}
+  .map{ margin-top:20px; border:2px solid #2092ad;position: relative;height: calc(100% - 102px)  }
+  .map #googleMap{
+    height: 100%!important;
+  }
+  .w3-tiny{margin:40px 40px 0;}
+  .slidecontainer {
+  width: 100%;
+      background: rgba(255,255,255,0.5);
+    padding: 15px;
+    position: relative;
+}
+.map-detail{
+  background:#459AAB;
+  text-transform: uppercase;
+  padding:0 20px;
+  padding-bottom: 10px;
+}
+.map-detail table{
+  margin:0;
+  color: #fff;
+}
+.map-detail table td ,.map-detail table th{
+  padding:2px !important;
+  position: relative;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+.sliderlabel{
+    white-space: nowrap;
+    position: absolute;
+    width: 90%;
+    pointer-events: none;
+}
+.sliderlabel label {
+    display: inline-block;
+    width: calc(100% - 92.7%);
+    font-size: 8px;
+    margin: 0;
+}
+.labels {
+    color: white;
+    text-align: center;
+    display: block;
+}
+.tooltipTag {
+    display: inline-block;
+    border: 1px solid #fff;
+    background: #066177;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 4px;
+}
+.topcoutryhead{
+    background: #459AAB;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+tbody td div{
+  text-transform: uppercase;
+  display: inline-block;
+  width:170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.container{
+  position: relative;
+  height: 100%;
+}
+.container .map-container{
+  position: relative;
+  height: 100%;
+}
+
+.slider_container{
+  position: absolute;
+  width: 70%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.slider_container input[type="range"]{
+    height: 10px;
+    width: 90%;
+}
+.slider_container .w3-tiny{
+  background: none !important;
+}
+.slider_container .tooltipTag{
+  right:10px;
+  top:10px;
+}
+.morebubbledetails{
+    width: 500px;
+    height: 250px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    padding-top: 40px;
+}
+.morebubbledetails .bubble{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  position: absolute;
+  background: #fff;
+  color: #fff;
+}
+.morebubbledetails .bubble.bubble0{
+  top: 65px;
+  right:75px;
+}
+.morebubbledetails .bubble.bubble1{
+  top: 0;
+  right:0;
+  left: 0;
+  margin: auto;
+}
+.morebubbledetails .bubble.bubble2{
+  top: 65px;
+  left:75px;
+}
+.morebubbledetails .bubble.bubble3{
+  bottom: 0;
+  left:0;
+}
+.morebubbledetails .bubble.bubble4{
+  right:0;
+  bottom: 0;
+}
+.morebubbledetails .bubble.greenbubble{
+background:green;
+}
+.morebubbledetails .bubble.amberbubble{
+background:#ffbf00;
+}
+.morebubbledetails .bubble.redbubble{
+  background:red;
+}
+.morebubbledetails .bubble > div{
+    height: 42px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    text-align: center;
+}
+.morebubbledetails .bubble > div span:first-child{
+    display: inline-block;
+    width: 100%;
+}
+.morebubbledetails .bubble > div span:last-child{
+  
+}
+.crossLines{
+    
+}
+.crossLines.crossLine1{
+    height: 2px;
+    background: #000;
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+}
+.crossLines.crossLine2{
+    width: 445px;
+    height: 445px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.info-window{
+	width: 500px;
+	height: 340px;
+	background: rgba(255,255,255,0.5);
+	position: fixed;
+	top:20%;
+	left: 20%;
+}
+.info-window .row{
+	padding: 20px;
+	margin: 0;
+}
+.info-window .row > div.col-sm-6 > div{
+	background: #fff;
+	height: 80px;
+	margin: 10px;
+}
+.info-window .row > div.col-sm-6.heading > div{
+	text-align: center;
+	text-transform: uppercase;
+	padding: 20px 0;
+}
+.info-window .row > div.col-sm-6.heading > div span:first-child{
+	display: block;
+	width: 100%;
+}
+.info-window .row > div.col-sm-6.heading > div span:last-child{
+	display: block;
+	width: 100%;
+	font-weight: bold;
+}
+.info-window .row > div.col-sm-6.scoretiles > div span{
+	text-align: center;
+	padding: 20px 0;
+	height: 100%;
+}
+.info-window .row > div.col-sm-6.scoretiles.red_color > div span:first-child{
+	background: red;
+}
+.info-window .row > div.col-sm-6.scoretiles.green_color > div span:first-child{
+	background: green;
+}
+.info-window .row > div.col-sm-6.scoretiles.amber_color > div span:first-child{
+	background: #ffbf00;
+}
+.info-window .row > div.col-sm-6.scoretiles > div span:first-child{
+	display: inline-block;
+	width: 50%;
+	color: #fff;
+	font-weight: bold;
+	font-size: 30px;
+}
+.info-window .row > div.col-sm-6.scoretiles > div span:last-child{
+	display: inline-block;
+	width: 50%;
+}
+.close-btn{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
