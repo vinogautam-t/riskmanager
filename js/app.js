@@ -1,0 +1,268 @@
+var map;
+    angular.module('todoApp', [])
+    .directive("draggable", function(){
+	    return {
+	        restrict: "A",
+	        link: function (scope, element, attrs) {
+	            $(element).draggable();
+	        }
+	    };
+	})
+    .controller('TodoController', function($scope) {
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip(); 
+        });
+
+
+        $scope.pagetwo = function(){
+          window.location.assign('page2.html');
+        };
+
+          $scope.currentDate = new Date().getTime();
+
+          $scope.selectedData = {};
+          $scope.markers = [];
+
+          $scope.selectedWindow = [];
+
+          $scope.removeSelected = function(ind){
+          	$scope.selectedWindow.splice(ind, 1);
+          };
+
+          $scope.getColorclass = function(name){
+            if(!name) return;
+            name = name.split('(')[1].split(')')[0];
+            if(name >= 500){
+                clr = 'red';
+            } else if(name >= 100){
+                clr = 'amber';
+            } else{
+                clr = 'green';
+            }
+            return clr+'_clr';
+          }
+
+          $scope.mockData = [
+                  {
+                    "MAINADDRESS_COUNTRY":"North America", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 7, "FIVEMIN":20, "ONEDAY":40, "ONEWEEK": 80, "ONEMONTH": 350, "THREEMONTH": 800, "LATITUDE": 37.588119, "LONGITUDE": -95.370119}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 7, "FIVEMIN":190, "ONEDAY":270, "ONEWEEK": 400, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 42.948381, "LONGITUDE": -115.049012}
+                  },
+                  {
+                    "MAINADDRESS_COUNTRY":"South Africa", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 9, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": -7.874265, "LONGITUDE": 16.377877}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 7,  "FIVEMIN":35, "ONEDAY":47, "ONEWEEK": 97, "ONEMONTH": 200, "THREEMONTH": 500, "LATITUDE": -8.570158, "LONGITUDE": 32.542681}
+                  },
+                  {
+                    "MAINADDRESS_COUNTRY":"India", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 9,  "FIVEMIN":105, "ONEDAY":170, "ONEWEEK": 240, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 28.777289, "LONGITUDE": 76.117372}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 7,  "FIVEMIN":600, "ONEDAY":650, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 14.445319, "LONGITUDE": 78.225824}
+                  },
+                  {
+                    "MAINADDRESS_COUNTRY":"China", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 9, "FIVEMIN":600, "ONEDAY":640, "ONEWEEK": 750, "ONEMONTH": 800, "THREEMONTH": 1600, "LATITUDE": 34.818313, "LONGITUDE": 88.334275}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 9,  "FIVEMIN":300, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 30.377614, "LONGITUDE": 100.633583}
+                  },
+                  {
+                    "MAINADDRESS_COUNTRY":"Mexico", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 7, "FIVEMIN":100, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 23.634501, "LONGITUDE": -102.552788}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 7, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": 23.110681, "LONGITUDE": -101.143643}
+                  },
+                  {
+                    "MAINADDRESS_COUNTRY":"Canada", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 7,"FIVEMIN":90, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 56.130367, "LONGITUDE": -106.346771}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 9, "FIVEMIN":100, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 56.078167, "LONGITUDE": -122.842410}
+                  },
+                  {
+                    "MAINADDRESS_COUNTRY":"Italy", 
+                    "TRANSACTION_DATA":
+                      {"FRAUDSCORE": 7,  "FIVEMIN":300, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
+                    "MEMBER_DATA":
+                      {"FRAUDSCORE": 9, "FIVEMIN":600, "ONEDAY":700, "ONEWEEK": 800, "ONEMONTH": 900, "THREEMONTH": 1000, "LATITUDE": 42.452088, "LONGITUDE": 11.983245}
+                  }
+              ];
+
+
+          $scope.filters = {transaction: 7, member: 7};
+
+          $scope.filterMap = function(){
+            for (var i = 0; i < $scope.markers.length; i++) {
+              $scope.markers[i].setMap(null);
+            }
+            $scope.markers = [];
+            $scope.plotMarker();
+          };
+
+          $scope.topTransaction = [];
+          $scope.topMember = [];
+
+          $scope.plotMarker = function(){
+              $scope.topTransaction = [];
+              $scope.topMember = [];
+              var labelAnchor = new google.maps.Point(7, 45);
+              var zoomMap =false;
+              var zoomFlag = true;
+              if($scope.filters.transaction > 7 || $scope.filters.member > 7){
+                var zoomMap = true;
+                labelAnchor = new google.maps.Point(7, 65);
+              } else {
+                map.setCenter(new google.maps.LatLng(38.694085,-1.710901));
+                map.setZoom(2);
+              }
+
+              angular.forEach($scope.mockData, function(v,i){
+
+                    var labelColor;
+
+                    if($scope.filters.transaction >= 7 && $scope.filters.transaction <= v.TRANSACTION_DATA.FRAUDSCORE){
+                        
+                        if(zoomMap && zoomFlag){
+                            map.setCenter(new google.maps.LatLng(v.TRANSACTION_DATA.LATITUDE, v.TRANSACTION_DATA.LONGITUDE));
+                            map.setZoom(5);
+                            zoomFlag = false;
+                        }
+
+                        $scope.topTransaction.push(v.MAINADDRESS_COUNTRY+' ('+v.TRANSACTION_DATA.FIVEMIN+')');
+
+                        if(v.TRANSACTION_DATA.FIVEMIN >= 500){
+                            labelColor = 'red';
+                            v.labelClass = "red_color";
+                        } else if(v.TRANSACTION_DATA.FIVEMIN >= 100){
+                            labelColor = '#ffbf00';
+                            v.labelClass = "amber_color";
+                        } else{
+                            labelColor = 'green';
+                            v.labelClass = "green_color";
+                        }
+
+                        var marker = new MarkerWithLabel({
+                            position: new google.maps.LatLng(v.TRANSACTION_DATA.LATITUDE, v.TRANSACTION_DATA.LONGITUDE),
+                            map: map,
+                            ind: v,
+                            selType: "TRANSACTION_DATA",
+                            labelContent: v.TRANSACTION_DATA.FIVEMIN,
+                            labelAnchor: labelAnchor,
+                            labelClass: "labels", // the CSS class for the label
+                            labelInBackground: false,
+                            icon: pinSymbol(labelColor, zoomMap ? 2 : 1.3)
+                        });
+
+                        $scope.markers.push(marker);
+
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            //$("#myModal").modal('show');
+                            //$scope.selectedData = this;
+                            $scope.selectedWindow.push(this);
+                            $scope.$apply();
+                        });
+                    }
+
+                    var labelColor2;
+                    if($scope.filters.member >= 7 && $scope.filters.member <= v.MEMBER_DATA.FRAUDSCORE){
+                        
+                        if(zoomMap && zoomFlag){
+                            map.setCenter(new google.maps.LatLng(v.MEMBER_DATA.LATITUDE, v.MEMBER_DATA.LONGITUDE));
+                            map.setZoom(5);
+                            zoomFlag = false;
+                        }
+
+                        $scope.topMember.push(v.MAINADDRESS_COUNTRY+' ('+v.MEMBER_DATA.FIVEMIN+')');
+
+                        if(v.MEMBER_DATA.FIVEMIN >= 500){
+                            labelColor2 = 'red';
+                        } else if(v.MEMBER_DATA.FIVEMIN >= 100){
+                            labelColor2 = '#ffbf00';
+                        } else{
+                            labelColor2 = 'green';
+                        }
+
+                        var marker2 = new MarkerWithLabel({
+                            position: new google.maps.LatLng(v.MEMBER_DATA.LATITUDE, v.MEMBER_DATA.LONGITUDE),
+                            map: map,
+                            ind: v,
+                            selType: "MEMBER_DATA",
+                            labelContent: v.MEMBER_DATA.FIVEMIN,
+                            labelAnchor: labelAnchor,
+                            labelClass: "labels", // the CSS class for the label
+                            labelInBackground: false,
+                            icon: pinSymbol(labelColor2, zoomMap ? 2 : 1.3)
+                        });
+
+                        $scope.markers.push(marker2);
+
+                        google.maps.event.addListener(marker2, "click", function (e) {
+                            //$("#myModal").modal('show');
+
+                            //$scope.selectedData = this;
+                            $scope.selectedWindow.push(this);
+                            $scope.$apply();
+
+                        });
+                    }
+              });
+
+              $scope.topTransaction.sort(function(a1, b1){
+                a = a1.replace("(", "").replace(")", "").split(" ")[1];
+                b = b1.replace("(", "").replace(")", "").split(" ")[1];
+                return b-a
+              });
+
+              $scope.topMember.sort(function(a1, b1){
+                a = a1.replace("(", "").replace(")", "").split(" ")[1];
+                b = b1.replace("(", "").replace(")", "").split(" ")[1];
+                return b-a
+              });
+
+
+              if(!$scope.$$phase) {
+                $scope.$apply();
+              }
+          };
+
+
+          function initMap() {
+              var latLng = new google.maps.LatLng(38.694085,-1.710901);
+
+              map = new google.maps.Map(document.getElementById('googleMap'), {
+                  zoom: 2,
+                  center: latLng,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  zoomControl: false,
+                  mapTypeControl: false,
+                  scaleControl: false,
+                  streetViewControl: false,
+                  rotateControl: false,
+                  fullscreenControl: false
+              });
+
+              $scope.plotMarker();
+          }
+
+          function log(h) {
+              document.getElementById("log").innerHTML += h + "<br />";
+          }
+
+          function pinSymbol(color, scale) {
+              return {
+                  path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
+                  fillColor: color,
+                  fillOpacity: 1,
+                  strokeColor: '#000',
+                  strokeWeight: 2,
+                  scale: scale
+              };
+          }
+          google.maps.event.addDomListener(window, 'load', initMap);
+    });
