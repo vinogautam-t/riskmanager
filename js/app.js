@@ -137,13 +137,13 @@ var map;
                         $scope.topTransaction.push(v.MAINADDRESS_COUNTRY+' ('+v.TRANSACTION_DATA.FIVEMIN+')');
 
                         if(v.TRANSACTION_DATA.FIVEMIN >= 500){
-                            labelColor = 'red';
+                            labelColor = '#d9534f';
                             v.labelClass = "red_color";
                         } else if(v.TRANSACTION_DATA.FIVEMIN >= 100){
                             labelColor = '#ffbf00';
                             v.labelClass = "amber_color";
                         } else{
-                            labelColor = 'green';
+                            labelColor = '#5cb85c';
                             v.labelClass = "green_color";
                         }
 
@@ -181,11 +181,14 @@ var map;
                         $scope.topMember.push(v.MAINADDRESS_COUNTRY+' ('+v.MEMBER_DATA.FIVEMIN+')');
 
                         if(v.MEMBER_DATA.FIVEMIN >= 500){
-                            labelColor2 = 'red';
+                            labelColor2 = '#d9534f';
+                            v.labelClass = "red_color";
                         } else if(v.MEMBER_DATA.FIVEMIN >= 100){
                             labelColor2 = '#ffbf00';
+                            v.labelClass = "amber_color";
                         } else{
-                            labelColor2 = 'green';
+                            labelColor2 = '#5cb85c';
+                            v.labelClass = "green_color";
                         }
 
                         var marker2 = new MarkerWithLabel({
