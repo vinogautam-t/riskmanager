@@ -492,6 +492,7 @@ footer{
   background: #dfdfdf;
   padding: 15px;
   box-shadow: 0 7px 5px -4px #000;
+  margin: 0 10px;
 }
 .modal-dialog{
   width: 900px;
