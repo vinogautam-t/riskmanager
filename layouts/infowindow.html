@@ -1,0 +1,23 @@
+<div ng-repeat="wind in selectedWindow" class="info-window" draggable>
+	<i class="fas fa-times close-btn" ng-click="removeSelected($index);"></i>
+  <h4>{{wind.ind.MAINADDRESS_COUNTRY}} {{wind.selType == 'TRANSACTION_DATA' ? 'Transaction Score' : 'Member Score'}}</h4>
+	<div class="row five-minscandle-row">
+    <div ng-click="pagetwo(wind.ind, '5MINS', 'FIVEMIN');" class="col-sm-6 threemonth scoretiles" ng-class="{green_color: wind.ind[wind.selType].FIVEMIN < 100, amber_color: wind.ind[wind.selType].FIVEMIN>= 100 && wind.ind[wind.selType].FIVEMIN < 500, red_color: wind.ind[wind.selType].FIVEMIN>= 500}">
+      <div><span>{{wind.ind[wind.selType].FIVEMIN}}</span><span>5 min</span></div>
+    </div>
+  </div>
+  <div class="row">
+		<div ng-click="pagetwo(wind.ind, '1DAY', 'ONEDAY');" class="col-sm-6 fivemin scoretiles" ng-class="{green_color: wind.ind[wind.selType].ONEDAY < 100, amber_color: wind.ind[wind.selType].ONEDAY>= 100 && wind.ind[wind.selType].ONEDAY < 500, red_color: wind.ind[wind.selType].ONEDAY>= 500}">
+			<div><span>{{wind.ind[wind.selType].ONEDAY}}</span><span>1 day</span></div>
+		</div>
+		<div ng-click="pagetwo(wind.ind, '1WEEK', 'ONEWEEK');" class="col-sm-6 oneday scoretiles" ng-class="{green_color: wind.ind[wind.selType].ONEWEEK < 100, amber_color: wind.ind[wind.selType].ONEWEEK>= 100 && wind.ind[wind.selType].ONEWEEK < 500, red_color: wind.ind[wind.selType].ONEWEEK>= 500}">
+			<div><span>{{wind.ind[wind.selType].ONEWEEK}}</span><span>1 week</span></div>
+		</div>
+		<div ng-click="pagetwo(wind.ind, '1MONTH', 'ONEMONTH');" class="col-sm-6 oneweek scoretiles" ng-class="{green_color: wind.ind[wind.selType].ONEMONTH < 100, amber_color: wind.ind[wind.selType].ONEMONTH>= 100 && wind.ind[wind.selType].ONEMONTH < 500, red_color: wind.ind[wind.selType].ONEMONTH>= 500}">
+			<div><span>{{wind.ind[wind.selType].ONEMONTH}}</span><span>1 month</span></div>
+		</div>
+		<div ng-click="pagetwo(wind.ind, '3MONTHS', 'THREEMONTH');" class="col-sm-6 onemonth scoretiles" ng-class="{green_color: wind.ind[wind.selType].THREEMONTH < 100, amber_color: wind.ind[wind.selType].THREEMONTH>= 100 && wind.ind[wind.selType].THREEMONTH < 500, red_color: wind.ind[wind.selType].THREEMONTH>= 500}">
+			<div><span>{{wind.ind[wind.selType].THREEMONTH}}</span><span>3 months</span></div>
+		</div>
+	</div>
+</div>

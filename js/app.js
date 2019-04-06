@@ -13,9 +13,42 @@ var map;
           $('[data-toggle="tooltip"]').tooltip(); 
         });
 
+        $scope.transactionData = [
+          {type: 'Reward Reservation Night', tcount: 0, mcount: 0, avg: 7},
+          {type: 'Profile Change', tcount: 0, mcount: 0, avg: 6},
+          {type: 'Fradulant Email', tcount: 0, mcount: 0, avg: 5},
+          {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 4},
+          {type: 'Digital Signature', tcount: 0, mcount: 0, avg: 5},
+        ];
 
-        $scope.pagetwo = function(){
-          window.location.assign('page2.html');
+        $scope.splitfiveNum = function(num){
+          var spli = num/5;
+          var subt = Math.floor(spli * 48 / 100);
+          var eachv = spli - subt;
+          var arr = [eachv,eachv,eachv,eachv,eachv];
+          for(i=0;i<5;i++){
+            var ind = Math.floor(Math.random() * 5);
+            arr[ind] = arr[ind] + subt;
+            }
+          return arr;
+        }
+
+        $scope.popup = function(){
+          $("#myModal").modal('show');
+        };
+
+        $scope.pagetwo = function(ind, min, s){
+          $scope.selectedData = ind;
+          $scope.selectedDataTime = min;
+          $scope.selectedWindow = [];
+
+          var cnt1 = $scope.splitfiveNum(ind.TRANSACTION_DATA[s]);
+          var cnt2 = $scope.splitfiveNum(ind.MEMBER_DATA[s]);
+
+          angular.forEach($scope.transactionData, function(v,k){
+            v.tcount = cnt1[k];
+            v.mcount = cnt2[k];
+          });
         };
 
           $scope.currentDate = new Date().getTime();
@@ -111,15 +144,17 @@ var map;
           $scope.plotMarker = function(){
               $scope.topTransaction = [];
               $scope.topMember = [];
-              var labelAnchor = new google.maps.Point(7, 45);
+              var labelAnchor = new google.maps.Point(10, 48);
               var zoomMap =false;
               var zoomFlag = true;
               if($scope.filters.transaction > 7 || $scope.filters.member > 7){
                 var zoomMap = true;
-                labelAnchor = new google.maps.Point(7, 65);
+                labelAnchor = new google.maps.Point(15, 75);
+                $("body").addClass('zoommap');
               } else {
                 map.setCenter(new google.maps.LatLng(38.694085,-1.710901));
                 map.setZoom(2);
+                $("body").removeClass('zoommap');
               }
 
               angular.forEach($scope.mockData, function(v,i){
@@ -263,7 +298,7 @@ var map;
                   fillColor: color,
                   fillOpacity: 1,
                   strokeColor: '#000',
-                  strokeWeight: 2,
+                  strokeWeight: 0.5,
                   scale: scale
               };
           }
