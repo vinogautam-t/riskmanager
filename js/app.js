@@ -147,7 +147,7 @@ var map;
               var labelAnchor = new google.maps.Point(10, 48);
               var zoomMap =false;
               var zoomFlag = true;
-              if($scope.filters.transaction > 7 || $scope.filters.member > 7){
+              /*if($scope.filters.transaction > 7 || $scope.filters.member > 7){
                 var zoomMap = true;
                 labelAnchor = new google.maps.Point(15, 75);
                 $("body").addClass('zoommap');
@@ -155,7 +155,7 @@ var map;
                 map.setCenter(new google.maps.LatLng(38.694085,-1.710901));
                 map.setZoom(2);
                 $("body").removeClass('zoommap');
-              }
+              }*/
 
               angular.forEach($scope.mockData, function(v,i){
 
@@ -252,14 +252,14 @@ var map;
               });
 
               $scope.topTransaction.sort(function(a1, b1){
-                a = a1.replace("(", "").replace(")", "").split(" ")[1];
-                b = b1.replace("(", "").replace(")", "").split(" ")[1];
+                a = a1.replace("(", "").replace(")", "").split(" ").pop();
+                b = b1.replace("(", "").replace(")", "").split(" ").pop();
                 return b-a
               });
 
               $scope.topMember.sort(function(a1, b1){
-                a = a1.replace("(", "").replace(")", "").split(" ")[1];
-                b = b1.replace("(", "").replace(")", "").split(" ")[1];
+                a = a1.replace("(", "").replace(")", "").split(" ").pop();
+                b = b1.replace("(", "").replace(")", "").split(" ").pop();
                 return b-a
               });
 
@@ -299,7 +299,7 @@ var map;
                   fillOpacity: 1,
                   strokeColor: '#000',
                   strokeWeight: 0.5,
-                  scale: 1.3
+                  scale: scale
               };
           }
           //google.maps.event.addDomListener(window, 'load', initMap);
