@@ -77,7 +77,7 @@ var map;
 
           $scope.mockData = [
                   {
-                    "MAINADDRESS_COUNTRY":"North America", 
+                    "MAINADDRESS_COUNTRY":"USA", 
                     "TRANSACTION_DATA":
                       {"FRAUDSCORE": 7, "FIVEMIN":20, "ONEDAY":40, "ONEWEEK": 80, "ONEMONTH": 350, "THREEMONTH": 800, "LATITUDE": 37.588119, "LONGITUDE": -95.370119}, 
                     "MEMBER_DATA":
