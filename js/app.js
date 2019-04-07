@@ -299,8 +299,12 @@ var map;
                   fillOpacity: 1,
                   strokeColor: '#000',
                   strokeWeight: 0.5,
-                  scale: scale
+                  scale: 1.3
               };
           }
-          google.maps.event.addDomListener(window, 'load', initMap);
+          //google.maps.event.addDomListener(window, 'load', initMap);
+
+          $scope.initMap = function(){
+            initMap();
+          };
     });

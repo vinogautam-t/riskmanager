@@ -29,8 +29,11 @@ body{
     background: #ebebeb;
     position: fixed;
     width: 100%;
-    height: calc(100% - 144px);
+    height: calc(100% - 100px);
     top: 70px;
+}
+.mapcontainerdiv .container{
+  margin-top: 20px;
 }
 .container h1{
     margin-left: -15px;
@@ -55,7 +58,7 @@ body{
     padding: 10px 20px;
     font-size: 13px;
     position: relative;
-    box-shadow: 0 7px 5px -4px #ccc;
+    box-shadow:  0 1px 2px -1px #000;
     padding-left: 150px;
   }
   .scoredata span {
@@ -65,7 +68,7 @@ body{
     padding: 5px;
     padding-right: 30px;
     position: relative;
-    box-shadow: 0 2px 5px 0px #ccc;
+    box-shadow:  0 1px 2px -1px #000;
 }
 .scoredata span:after{
   content: '';
@@ -369,7 +372,7 @@ footer{
     position: fixed;
     bottom: 0;
     left: 0;
-    background: #00324B;
+    background: #000;
     width: 100%;
     color: #fff;
     padding: 10px;
@@ -405,7 +408,7 @@ footer{
   padding: 20px;
   color:#3289b3;
   background: #fff;
-  box-shadow: 0 7px 5px -4px #ccc;
+  box-shadow:  0 1px 2px -1px #000;
   position: relative;
 }
 .score-table table{
@@ -469,7 +472,7 @@ footer{
     background: #dfdfdf;
     margin: 20px;
     padding: 10px;
-    box-shadow: 0 7px 5px -4px #000;
+    box-shadow:  0 1px 2px -1px #000;
 }
 .modal-body .member-info i{
     font-size: 70px;
@@ -491,7 +494,7 @@ footer{
 .modal-body .ev-hierarchy{
   background: #dfdfdf;
   padding: 15px;
-  box-shadow: 0 7px 5px -4px #000;
+  box-shadow:  0 1px 2px -1px #000;
   margin: 0 10px;
 }
 .modal-dialog{
@@ -580,4 +583,7 @@ footer{
 
 .modal-body .slider.round:before {
   border-radius: 50%;
+}
+.cp{
+  cursor: pointer;
 }

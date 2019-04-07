@@ -16,13 +16,13 @@
 </head>
 <body ng-controller="TodoController">
 <div ng-include="'layouts/header.html'"></div>
-  <section ng-hide="selectedData.MAINADDRESS_COUNTRY" class="tool-sct">
+  <section ng-hide="selectedData.MAINADDRESS_COUNTRY" class="tool-sct mapcontainerdiv" ng-init="initMap();">
     <div class="container">
-      <h1>Welcome Charlie</h1>
       <div class="row slider_container" >
         <div class="col-sm-4">
           <div class="w3-light-grey w3-tiny">
             <div class="slidecontainer">
+              <label>Transaction Risk Score</label>
               <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.transaction" id="myRange1" ng-change="filterMap();">
               <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i>
               <div class="sliderlabel">
@@ -44,6 +44,7 @@
         <div class="col-sm-4 pull-right">
           <div class="w3-light-grey w3-tiny">
           <div class="slidecontainer">
+             <label>Member Risk Score</label>
               <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.member" id="myRange2" ng-change="filterMap();">
               <i class="tooltipTag" data-toggle="tooltip" title="About Member score">?</i>
               <div class="sliderlabel">
