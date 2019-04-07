@@ -103,7 +103,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="tr in transactionData track by $index" ng-click="popup(tr);">
+                <tr ng-repeat="tr in transactionData track by $index" ng-click="popup(tr);" class="cp">
                     <td>{{tr.type}}</td>
                     <td class='align-center'>{{tr.avg}}</td>
                     <td class='align-center'>{{tr.tcount}}</td>
