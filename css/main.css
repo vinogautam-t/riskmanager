@@ -172,11 +172,11 @@ body{
 }
 .topcoutryhead{
     text-align: center;
-    padding: 0;
+    padding: 2px;
     margin: 0;
     position: absolute;
     width: 100px;
-    border: 2px solid;
+    border: 1px solid;
     color: #00324B;
     left: 25px;
     bottom: 25px;
@@ -212,8 +212,9 @@ tbody td div{
   z-index: 99;
 }
 .slider_container input[type="range"]{
-    height: 10px;
+    height: 4px;
     width: 90%;
+    background: #00324B;
 }
 .slider_container .w3-tiny{
   background: none !important;
@@ -589,4 +590,20 @@ footer{
 }
 .cp{
   cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none!important;
+  appearance: none!important;
+  width: 6px!important;
+  height: 15px!important;
+  background: #00324B!important;
+  cursor: pointer!important;
+  border-radius: 0 !important;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 6px!important;
+  height: 15px!important;
+  background: #00324B!important;
+  cursor: pointer!important;
 }
