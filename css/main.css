@@ -137,7 +137,7 @@ body{
 }
 .sliderlabel label {
     display: inline-block;
-    width: calc(100% - 90%);
+    width: calc(100% - 90.3%);
     font-size: 8px;
     margin: 0;
 }
