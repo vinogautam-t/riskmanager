@@ -438,9 +438,10 @@ footer{
 .score-label{
     position: absolute;
     color: #fff;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
     top: 35px;
     left: 70px;
+    padding: 2px;
 }
 .score-label div{
   display:inline-block;
