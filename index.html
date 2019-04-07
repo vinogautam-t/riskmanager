@@ -26,7 +26,6 @@
               <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.transaction" id="myRange1" ng-change="filterMap();">
               <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i>
               <div class="sliderlabel">
-                <label>0</label>
                 <label>1</label>
                 <label>2</label>
                 <label>3</label>
@@ -48,7 +47,6 @@
               <input type="range" min="1" max="10" value="10" class="slider" ng-model="filters.member" id="myRange2" ng-change="filterMap();">
               <i class="tooltipTag" data-toggle="tooltip" title="About Member score">?</i>
               <div class="sliderlabel">
-                <label>0</label>
                 <label>1</label>
                 <label>2</label>
                 <label>3</label>
@@ -72,12 +70,16 @@
                <div class="topcoutryhead"><label>Top 5</label> <span>Countries</span></div>
                
                <div class="transactionscore scoredata" >
-                <label>Transaction Score</label>
+                <label>Transaction Score
+                <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i>
+                </label>
                 <span ng-repeat="tr in topTransaction track by $index" ng-class="getColorclass(tr)" ng-if="$index < 5">{{tr}}</span>
                </div>
 
                <div class="memberscore scoredata">
-                <label>Member Score</label>
+                <label>Member Score
+                <i class="tooltipTag" data-toggle="tooltip" title="About Transaction score">?</i>
+                </label>
                 <span ng-repeat="tr in topMember track by $index" ng-class="getColorclass(tr)" ng-if="$index < 5">{{tr}}</span>
                </div>
            </div>

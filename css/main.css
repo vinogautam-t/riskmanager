@@ -137,7 +137,7 @@ body{
 }
 .sliderlabel label {
     display: inline-block;
-    width: calc(100% - 92.7%);
+    width: calc(100% - 90%);
     font-size: 8px;
     margin: 0;
 }
@@ -213,7 +213,7 @@ tbody td div{
 }
 .slider_container input[type="range"]{
     height: 4px;
-    width: 90%;
+    width: 100%;
     background: #00324B;
 }
 .slider_container .w3-tiny{
@@ -381,6 +381,7 @@ footer{
 .map-detail .scoredata label{
   display: inline-block;
   width: 200px;
+  position: relative;
 }
 .row.five-minscandle-row{
       margin-bottom: -40px;
