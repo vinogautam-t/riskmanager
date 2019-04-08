@@ -16,7 +16,7 @@ var map;
         $scope.transactionData = [
           {type: 'Reward Reservation Night', tcount: 0, mcount: 0, avg: 7},
           {type: 'Profile Change', tcount: 0, mcount: 0, avg: 6},
-          {type: 'Fradulant Email', tcount: 0, mcount: 0, avg: 5},
+          {type: 'Fraudulent Email', tcount: 0, mcount: 0, avg: 5},
           {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 4},
           {type: 'Digital Signature', tcount: 0, mcount: 0, avg: 5},
         ];
@@ -38,12 +38,15 @@ var map;
         };
 
         $scope.pagetwo = function(ind, min, s){
-          $scope.selectedData = ind;
+          if(ind){
+            $scope.selectedData = ind;
+          }
+          
           $scope.selectedDataTime = min;
           $scope.selectedWindow = [];
 
-          var cnt1 = $scope.splitfiveNum(ind.TRANSACTION_DATA[s]);
-          var cnt2 = $scope.splitfiveNum(ind.MEMBER_DATA[s]);
+          var cnt1 = $scope.splitfiveNum($scope.selectedData.TRANSACTION_DATA[s]);
+          var cnt2 = $scope.splitfiveNum($scope.selectedData.MEMBER_DATA[s]);
 
           angular.forEach($scope.transactionData, function(v,k){
             v.tcount = cnt1[k];
@@ -140,6 +143,11 @@ var map;
 
           $scope.topTransaction = [];
           $scope.topMember = [];
+
+          $scope.resetMap = function(){
+            map.setCenter(new google.maps.LatLng(38.694085,-1.710901));
+            map.setZoom(2);
+          };
 
           $scope.plotMarker = function(){
               $scope.topTransaction = [];
@@ -277,7 +285,7 @@ var map;
                   zoom: 2,
                   center: latLng,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
-                  zoomControl: false,
+                  zoomControl: true,
                   mapTypeControl: false,
                   scaleControl: false,
                   streetViewControl: false,

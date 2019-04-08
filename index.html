@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="todoApp">
 <head>
-  <title>Demo</title>
+  <title>Aegis</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -61,11 +61,16 @@
             </div>
        </div>
       </div>
-      </div>        
+      </div>
+              
       <div class="row map-container">
           <div class="map">
-            <div id="googleMap" style="width:100%;height:400px;"></div>           
+            <div id="googleMap" style="width:100%;height:400px;"></div>          
+            <div class="reset-map cp" ng-click="resetMap();">
+              <i class="fas fa-refresh" data-toggle="tooltip" title="Reset"></i>
+            </div> 
           </div>
+
           <div class="map-detail">
                <div class="topcoutryhead"><label>Top 5</label> <span>Countries</span></div>
                
@@ -93,6 +98,13 @@
         <div class="score-label">
           <i class="fas fa-clock"></i>
           <div>{{selectedDataTime}}<br>SCORE</div>          
+        </div>
+        <div class="score-filter-period">
+          <span ng-click="pagetwo(undefined, '5MINS', 'FIVEMIN');" ng-if="selectedDataTime != '5MINS'" class="cp">5Mi</span>
+          <span ng-click="pagetwo(undefined, '1DAY', 'ONEDAY');"  ng-if="selectedDataTime != '1DAY'" class="cp">1D</span>
+          <span ng-click="pagetwo(undefined, '1WEEK', 'ONEWEEK');"  ng-if="selectedDataTime != '1WEEK'" class="cp">1W</span>
+          <span ng-click="pagetwo(undefined, '1MONTH', 'ONEMONTH');"  ng-if="selectedDataTime != '1MONTH'" class="cp">1M</span>
+          <span ng-click="pagetwo(undefined, '3MONTHS', 'THREEMONTH');"  ng-if="selectedDataTime != '3MONTHS'" class="cp">3M</span>
         </div>
         <h4 class='table-header text-center'>{{selectedData.MAINADDRESS_COUNTRY}} TRANSACTION TABLE</h4>
         <table class="table table-bordered custom-table">
