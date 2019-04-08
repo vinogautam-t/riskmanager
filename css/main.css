@@ -41,7 +41,7 @@ body{
     padding-bottom: 10px;
     border-bottom: 2px solid #ccc;
 }
-  .map{ position: relative;height: calc(100% - 200px)  }
+  .map{ position: relative;height: calc(100% - 165px)  }
   .map #googleMap{
     height: 100%!important;
   }
