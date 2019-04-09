@@ -15,10 +15,10 @@ var map;
 
         $scope.transactionData = [
           {type: 'Reward Reservation Night', tcount: 0, mcount: 0, avg: 7},
-          {type: 'Profile Change', tcount: 0, mcount: 0, avg: 6},
-          {type: 'Fraudulent Email', tcount: 0, mcount: 0, avg: 5},
-          {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 4},
-          {type: 'Digital Signature', tcount: 0, mcount: 0, avg: 5},
+          {type: 'Profile Change', tcount: 0, mcount: 0, avg: 8},
+          {type: 'Fraudulent Email', tcount: 0, mcount: 0, avg: 9},
+          {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 7},
+          {type: 'Digital Signature', tcount: 0, mcount: 0, avg: 10},
         ];
 
         $scope.splitfiveNum = function(num){
@@ -84,7 +84,7 @@ var map;
                     "TRANSACTION_DATA":
                       {"FRAUDSCORE": 7, "FIVEMIN":20, "ONEDAY":40, "ONEWEEK": 80, "ONEMONTH": 350, "THREEMONTH": 800, "LATITUDE": 37.588119, "LONGITUDE": -95.370119}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 7, "FIVEMIN":190, "ONEDAY":270, "ONEWEEK": 400, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 42.948381, "LONGITUDE": -115.049012}
+                      {"FRAUDSCORE": 7, "FIVEMIN":10, "ONEDAY":25, "ONEWEEK": 60, "ONEMONTH": 200, "THREEMONTH": 600, "LATITUDE": 42.948381, "LONGITUDE": -115.049012}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"South Africa", 
@@ -98,7 +98,7 @@ var map;
                     "TRANSACTION_DATA":
                       {"FRAUDSCORE": 9,  "FIVEMIN":105, "ONEDAY":170, "ONEWEEK": 240, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 28.777289, "LONGITUDE": 76.117372}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 7,  "FIVEMIN":600, "ONEDAY":650, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 14.445319, "LONGITUDE": 78.225824}
+                      {"FRAUDSCORE": 7,  "FIVEMIN":60, "ONEDAY":110, "ONEWEEK": 200, "ONEMONTH": 400, "THREEMONTH": 600, "LATITUDE": 14.445319, "LONGITUDE": 78.225824}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"China", 
@@ -110,23 +110,23 @@ var map;
                   {
                     "MAINADDRESS_COUNTRY":"Mexico", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 7, "FIVEMIN":100, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 23.634501, "LONGITUDE": -102.552788}, 
+                      {"FRAUDSCORE": 7, "FIVEMIN":100, "ONEDAY":150, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 23.634501, "LONGITUDE": -102.552788}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 7, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 250, "ONEMONTH": 500, "THREEMONTH": 600, "LATITUDE": 23.110681, "LONGITUDE": -101.143643}
+                      {"FRAUDSCORE": 7, "FIVEMIN":60, "ONEDAY":140, "ONEWEEK": 170, "ONEMONTH": 300, "THREEMONTH": 600, "LATITUDE": 23.110681, "LONGITUDE": -101.143643}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"Canada", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 7,"FIVEMIN":90, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 56.130367, "LONGITUDE": -106.346771}, 
+                      {"FRAUDSCORE": 7,"FIVEMIN":90, "ONEDAY":150, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 56.130367, "LONGITUDE": -106.346771}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 9, "FIVEMIN":100, "ONEDAY":100, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 56.078167, "LONGITUDE": -122.842410}
+                      {"FRAUDSCORE": 5, "FIVEMIN":70, "ONEDAY":100, "ONEWEEK": 180, "ONEMONTH": 300, "THREEMONTH": 500, "LATITUDE": 56.078167, "LONGITUDE": -122.842410}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"Italy", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 7,  "FIVEMIN":300, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
+                      {"FRAUDSCORE": 27,  "FIVEMIN":200, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 9, "FIVEMIN":600, "ONEDAY":700, "ONEWEEK": 800, "ONEMONTH": 900, "THREEMONTH": 1000, "LATITUDE": 42.452088, "LONGITUDE": 11.983245}
+                      {"FRAUDSCORE": 9, "FIVEMIN":100, "ONEDAY":150, "ONEWEEK": 400, "ONEMONTH": 500, "THREEMONTH": 1000, "LATITUDE": 42.452088, "LONGITUDE": 11.983245}
                   }
               ];
 

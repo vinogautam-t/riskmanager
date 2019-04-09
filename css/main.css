@@ -445,7 +445,7 @@ footer{
     border: 1px solid #fff;
     top: 35px;
     left: 70px;
-    padding: 2px;
+    padding: 2px 4px;
 }
 .score-label div{
   display:inline-block;
@@ -614,10 +614,10 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer!important;
 }
 .score-filter-period{
-  position: absolute;
-  right: 29px;
-  color: #fff;
-  top: 47px;
+    position: absolute;
+    right: 35px;
+    color: #fff;
+    top: 45px;
 }
 .score-filter-period span{
   text-decoration: underline;
@@ -643,4 +643,12 @@ input[type="range"]::-moz-range-thumb {
 }
 .reset-map .fa-refresh:before {
     content: "\f01e";
+}
+.pagination-label{
+  background: #63B8EF;
+    width: 20px;
+    height: 20px;
+    margin: 0 15px;
+    display: inline-block;
+    vertical-align: middle;
 }

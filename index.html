@@ -99,12 +99,23 @@
           <i class="fas fa-clock"></i>
           <div>{{selectedDataTime}}<br>SCORE</div>          
         </div>
-        <div class="score-filter-period">
+        <!-- <div class="score-filter-period">
           <span ng-click="pagetwo(undefined, '5MINS', 'FIVEMIN');" ng-if="selectedDataTime != '5MINS'" class="cp">5Mi</span>
           <span ng-click="pagetwo(undefined, '1DAY', 'ONEDAY');"  ng-if="selectedDataTime != '1DAY'" class="cp">1D</span>
           <span ng-click="pagetwo(undefined, '1WEEK', 'ONEWEEK');"  ng-if="selectedDataTime != '1WEEK'" class="cp">1W</span>
           <span ng-click="pagetwo(undefined, '1MONTH', 'ONEMONTH');"  ng-if="selectedDataTime != '1MONTH'" class="cp">1M</span>
           <span ng-click="pagetwo(undefined, '3MONTHS', 'THREEMONTH');"  ng-if="selectedDataTime != '3MONTHS'" class="cp">3M</span>
+        </div> -->
+        <div class="dropdown score-filter-period">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{selectedDataTime}}
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li ng-click="pagetwo(undefined, '5MINS', 'FIVEMIN');"><a href="#">5MINS</a></li>
+            <li ng-click="pagetwo(undefined, '1DAY', 'ONEDAY');"><a href="#">1DAY</a></li>
+            <li ng-click="pagetwo(undefined, '1WEEK', 'ONEWEEK');"><a href="#">1WEEK</a></li>
+            <li ng-click="pagetwo(undefined, '1MONTH', 'ONEMONTH');"><a href="#">1MONTH</a></li>
+            <li ng-click="pagetwo(undefined, '3MONTHS', 'THREEMONTH');"><a href="#">3MONTHS</a></li>
+          </ul>
         </div>
         <h4 class='table-header text-center'>{{selectedData.MAINADDRESS_COUNTRY}} TRANSACTION TABLE</h4>
         <table class="table table-bordered custom-table">
