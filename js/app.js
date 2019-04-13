@@ -59,6 +59,7 @@ var map;
 
         $scope.popup = function(){
           $scope.info.active_member = 0;
+          $scope.info.search = '';
           $("#myModal").modal('show');
         };
 
