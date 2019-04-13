@@ -654,3 +654,9 @@ input[type="range"]::-moz-range-thumb {
     display: inline-block;
     vertical-align: middle;
 }
+.pagination-row{
+  margin-top: 20px;
+}
+.pagination-row span.disabled{
+  opacity: 0.5;
+}

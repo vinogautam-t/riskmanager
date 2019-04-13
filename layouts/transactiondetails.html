@@ -11,39 +11,41 @@
         <div class="row">
           <div class="col-sm-5">
             <div class="search-box">
-              <input type="text" placeholder="Search Member">
+              <input type="text" placeholder="Search Member" ng-model="info.search" ng-enter="search();">
               <i class="fas fa-search"></i>
             </div>
 
-            <div class="member-info row">
+            
+
+            <div class="member-info row" ng-if="info.active_member != -1">
               <div class="col-sm-4">
                 <i class="fas fa-image"></i>
               </div>
               <div class="col-sm-8">
                 <div class="mmm1 mmm">
                   <span>MEMBER NUMBER</span>
-                  <span>XAT-1102</span>
+                  <span>{{screen3Mock[info.active_member].id}}</span>
                 </div>
                 <div class="mmm2 mmm">
                   <span>MEMBER SCORE</span>
-                  <span>9</span>
+                  <span>{{screen3Mock[info.active_member].score}}</span>
                 </div>
               </div>
             </div>
 
-            <div class="member-info similarpatter row">
+            <div class="member-info similarpatter row" ng-if="info.active_member != -1">
               <div class="col-sm-4">
                 <i class="fas fa-users"></i>
               </div>
               <div class="col-sm-8">
                 <div class="mmm1">
                   <span>Number of members with similar pattern</span>
-                  <span>10</span>
+                  <span>{{screen3Mock[info.active_member].similar_pattern}}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-sm-7 ">
+          <div class="col-sm-7 " ng-if="info.active_member != -1">
             <div class="ev-hierarchy">
             <h4 class="text-center">EVENT HIREARCHY</h4>
             <table class="table table-bordered custom-table">
@@ -58,27 +60,27 @@
               <tbody>
                 <tr>
                   <td><img src="image/icon_email.png"> Email Change</td>
-                  <td>03-21-2019 18:21 EST</td>
-                  <td>3</td>
-                  <td>5</td>
+                  <td>{{screen3Mock[info.active_member].score_details.email.ts}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.email.transaction}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.email.member}}</td>
                 </tr>
                 <tr>
                   <td><img src="image/icon_password.png"> Password Change</td>
-                  <td>04-21-2019 11:21 EST</td>
-                  <td>4</td>
-                  <td>6</td>
+                  <td>{{screen3Mock[info.active_member].score_details.password.ts}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.password.transaction}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.password.member}}</td>
                 </tr>
                 <tr>
                   <td><img src="image/icon_address.png"> Address Change</td>
-                  <td>03-21-2019 05:21 EST</td>
-                  <td>6</td>
-                  <td>7</td>
+                  <td>{{screen3Mock[info.active_member].score_details.address.ts}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.address.transaction}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.address.member}}</td>
                 </tr>
                 <tr>
                   <td><img src="image/icon_rewards.png"> Rewards Night Reservation</td>
-                  <td>08-21-2019 16:21 EST</td>
-                  <td>8</td>
-                  <td>9</td>
+                  <td>{{screen3Mock[info.active_member].score_details.rewards.ts}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.rewards.transaction}}</td>
+                  <td>{{screen3Mock[info.active_member].score_details.rewards.member}}</td>
                 </tr>
               </tbody>
             </table>
@@ -86,7 +88,7 @@
               <div class="col-sm-5">
                 <label>FRAUD</label>
                 <label class="switch">
-                  <input type="checkbox">
+                  <input ng-model="screen3Mock[info.active_member].is_fraud" type="checkbox">
                   <span class="slider round"></span>
                 </label>
               </div>
@@ -98,10 +100,17 @@
             </div>
           </div>
         </div>
-        <div class="row text-center">
-          <span class="cp"><i class="fas fa-angle-double-left"></i>Prev</span>
+        <div ng-if="info.active_member == -1" class="row text-center pagination-row">
+          No member exist!!
+        </div>
+        <div class="row text-center pagination-row" ng-if="info.active_member != -1">
+          <span class="cp disabled" ng-if="info.active_member == 0;"><i class="fas fa-angle-double-left " ></i>Prev</span>
+          <span class="cp" ng-if="info.active_member != 0;" ng-click="info.active_member = info.active_member - 1"><i class="fas fa-angle-double-left" ></i>Prev</span>
+
           <span class="pagination-label cp"></span>
-          <span class="cp">Next<i class="fas fa-angle-double-right"></i></span>
+
+          <span class="cp" ng-if="info.active_member != screen3Mock.length - 1;" ng-click="info.active_member = info.active_member + 1">Next<i class="fas fa-angle-double-right"></i></span>
+          <span class="cp disabled" ng-if="info.active_member == screen3Mock.length - 1;" >Next<i class="fas fa-angle-double-right"></i></span>
         </div>
       </div>
       <div class="modal-footer">

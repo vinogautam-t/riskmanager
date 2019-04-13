@@ -8,6 +8,18 @@ var map;
 	        }
 	    };
 	})
+    .directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+})
     .controller('TodoController', function($scope) {
         $(document).ready(function(){
           $('[data-toggle="tooltip"]').tooltip(); 
@@ -33,7 +45,20 @@ var map;
           return arr;
         }
 
+        $scope.search = function(){
+            var arr = $scope.screen3Mock.map(function(a){
+              return a.id;
+            });
+
+            var ind = arr.indexOf($scope.info.search);
+
+            $scope.info.active_member = ind;
+        };
+
+        $scope.info = {active_member: 0, search: ''};
+
         $scope.popup = function(){
+          $scope.info.active_member = 0;
           $("#myModal").modal('show');
         };
 
@@ -130,6 +155,169 @@ var map;
                   }
               ];
 
+
+          $scope.screen3Mock = [
+                {
+                      id: 'XAT-1101',
+                      score: 9,
+                      similar_pattern: 10,
+                      is_fraud: true,
+                      score_details : {
+                        'email': 
+                          {
+                            ts: '03-21-2019 18:21 EST',
+                            transaction: 3,
+                            member: 4
+                          },
+                        'password': 
+                          {
+                            ts: '03-21-2019 19:21 EST',
+                            transaction: 5,
+                            member: 6
+                          },
+                        'address': 
+                          {
+                            ts: '03-21-2019 19:51 EST',
+                            transaction: 7,
+                            member: 7
+                          },
+                        'rewards': 
+                          {
+                            ts: '04-21-2019 12:21 EST',
+                            transaction: 8,
+                            member: 9
+                          }
+                        }
+                },
+                {
+                      id: 'XAT-1102',
+                      score: 8,
+                      similar_pattern: 18,
+                      is_fraud: false,
+                      score_details : {
+                        'email': 
+                          {
+                            ts: '03-21-2019 17:21 EST',
+                            transaction: 3,
+                            member: 3
+                          },
+                        'password': 
+                          {
+                            ts: '03-21-2019 19:21 EST',
+                            transaction: 4,
+                            member: 5
+                          },
+                        'address': 
+                          {
+                            ts: '03-21-2019 19:51 EST',
+                            transaction: 6,
+                            member: 7
+                          },
+                        'rewards': 
+                          {
+                            ts: '04-21-2019 12:21 EST',
+                            transaction: 9,
+                            member: 8
+                          }
+                        }
+                },
+                {
+                      id: 'XAT-1103',
+                      score: 9,
+                      similar_pattern: 10,
+                      is_fraud: true,
+                      score_details : {
+                        'email': 
+                          {
+                            ts: '03-21-2019 18:25 EST',
+                            transaction: 2,
+                            member: 4
+                          },
+                        'password': 
+                          {
+                            ts: '03-21-2019 19:20 EST',
+                            transaction: 5,
+                            member: 5
+                          },
+                        'address': 
+                          {
+                            ts: '03-21-2019 19:55 EST',
+                            transaction: 6,
+                            member: 7
+                          },
+                        'rewards': 
+                          {
+                            ts: '04-21-2019 12:20 EST',
+                            transaction: 8,
+                            member: 9
+                          }
+                        }
+                },
+                {
+                      id: 'XAT-1104',
+                      score: 9,
+                      similar_pattern: 5,
+                      is_fraud: false,
+                      score_details : {
+                        'email': 
+                          {
+                            ts: '03-21-2019 18:21 EST',
+                            transaction: 3,
+                            member: 4
+                          },
+                        'password': 
+                          {
+                            ts: '03-21-2019 19:21 EST',
+                            transaction: 5,
+                            member: 6
+                          },
+                        'address': 
+                          {
+                            ts: '03-21-2019 19:51 EST',
+                            transaction: 7,
+                            member: 7
+                          },
+                        'rewards': 
+                          {
+                            ts: '04-21-2019 12:21 EST',
+                            transaction: 8,
+                            member: 9
+                          }
+                        }
+                },
+                {
+                      id: 'XAT-1105',
+                      score: 9,
+                      similar_pattern: 8,
+                      is_fraud: false,
+                      score_details : {
+                        'email': 
+                          {
+                            ts: '03-21-2019 18:21 EST',
+                            transaction: 3,
+                            member: 4
+                          },
+                        'password': 
+                          {
+                            ts: '03-21-2019 19:21 EST',
+                            transaction: 5,
+                            member: 6
+                          },
+                        'address': 
+                          {
+                            ts: '03-21-2019 19:51 EST',
+                            transaction: 7,
+                            member: 7
+                          },
+                        'rewards': 
+                          {
+                            ts: '04-21-2019 12:21 EST',
+                            transaction: 8,
+                            member: 9
+                          }
+                        }
+                }
+          ];
 
           $scope.filters = {transaction: 7, member: 7};
 
