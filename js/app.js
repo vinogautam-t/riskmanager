@@ -145,12 +145,12 @@ var map;
                     "TRANSACTION_DATA":
                       {"FRAUDSCORE": 7,"FIVEMIN":90, "ONEDAY":150, "ONEWEEK": 200, "ONEMONTH": 500, "THREEMONTH": 800, "LATITUDE": 56.130367, "LONGITUDE": -106.346771}, 
                     "MEMBER_DATA":
-                      {"FRAUDSCORE": 5, "FIVEMIN":70, "ONEDAY":100, "ONEWEEK": 180, "ONEMONTH": 300, "THREEMONTH": 500, "LATITUDE": 56.078167, "LONGITUDE": -122.842410}
+                      {"FRAUDSCORE": 8, "FIVEMIN":70, "ONEDAY":100, "ONEWEEK": 180, "ONEMONTH": 300, "THREEMONTH": 500, "LATITUDE": 56.078167, "LONGITUDE": -122.842410}
                   },
                   {
                     "MAINADDRESS_COUNTRY":"Italy", 
                     "TRANSACTION_DATA":
-                      {"FRAUDSCORE": 27,  "FIVEMIN":200, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
+                      {"FRAUDSCORE": 7,  "FIVEMIN":200, "ONEDAY":400, "ONEWEEK": 500, "ONEMONTH": 600, "THREEMONTH": 800, "LATITUDE": 41.871941, "LONGITUDE": 12.567380}, 
                     "MEMBER_DATA":
                       {"FRAUDSCORE": 9, "FIVEMIN":100, "ONEDAY":150, "ONEWEEK": 400, "ONEMONTH": 500, "THREEMONTH": 1000, "LATITUDE": 42.452088, "LONGITUDE": 11.983245}
                   }
