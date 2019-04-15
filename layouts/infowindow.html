@@ -1,7 +1,7 @@
 <div ng-repeat="wind in selectedWindow" class="info-window" draggable>
 	<i class="fas fa-times close-btn" ng-click="removeSelected($index);"></i>
   <h4>{{wind.ind.MAINADDRESS_COUNTRY}}</h4>
-  <h6>Number of Members with {{wind.selType == 'TRANSACTION_DATA' ? 'Transaction Score' : 'Member Score'}} >= {{wind.selType == 'TRANSACTION_DATA' ? filters.transaction : filters.member}}</h6>
+  <h6>Number of {{wind.selType == 'TRANSACTION_DATA' ? 'Transactions' : 'Members'}} with {{wind.selType == 'TRANSACTION_DATA' ? 'Transaction Score' : 'Member Score'}} >= {{wind.selType == 'TRANSACTION_DATA' ? filters.transaction : filters.member}}</h6>
 	<div class="row five-minscandle-row">
     <div ng-click="pagetwo(wind.ind, '5MINS', 'FIVEMIN');" class="col-sm-6 threemonth scoretiles" ng-class="{green_color: wind.ind[wind.selType].FIVEMIN < 100, amber_color: wind.ind[wind.selType].FIVEMIN>= 100 && wind.ind[wind.selType].FIVEMIN < 500, red_color: wind.ind[wind.selType].FIVEMIN>= 500}">
       <div><span>{{wind.ind[wind.selType].FIVEMIN}}</span><span>5 min</span></div>

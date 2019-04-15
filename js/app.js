@@ -29,17 +29,16 @@ var map;
           {type: 'Reward Reservation Night', tcount: 0, mcount: 0, avg: 7},
           {type: 'Profile Change', tcount: 0, mcount: 0, avg: 8},
           {type: 'Fraudulent Email', tcount: 0, mcount: 0, avg: 9},
-          {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 7},
-          {type: 'Digital Signature', tcount: 0, mcount: 0, avg: 10},
+          {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 7}
         ];
 
         $scope.splitfiveNum = function(num){
-          var spli = num/5;
+          var spli = num/4;
           var subt = Math.floor(spli * 48 / 100);
           var eachv = spli - subt;
           var arr = [eachv,eachv,eachv,eachv,eachv];
-          for(i=0;i<5;i++){
-            var ind = Math.floor(Math.random() * 5);
+          for(i=0;i<4;i++){
+            var ind = Math.floor(Math.random() * 4);
             arr[ind] = arr[ind] + subt;
             }
           return arr;
@@ -161,7 +160,7 @@ var map;
                 {
                       id: 'XAT-1101',
                       score: 9,
-                      similar_pattern: 10,
+                      similar_pattern: 5,
                       is_fraud: true,
                       score_details : {
                         'email': 
@@ -193,7 +192,7 @@ var map;
                 {
                       id: 'XAT-1102',
                       score: 8,
-                      similar_pattern: 18,
+                      similar_pattern: 5,
                       is_fraud: false,
                       score_details : {
                         'email': 
@@ -225,7 +224,7 @@ var map;
                 {
                       id: 'XAT-1103',
                       score: 9,
-                      similar_pattern: 10,
+                      similar_pattern: 5,
                       is_fraud: true,
                       score_details : {
                         'email': 
@@ -289,7 +288,7 @@ var map;
                 {
                       id: 'XAT-1105',
                       score: 9,
-                      similar_pattern: 8,
+                      similar_pattern: 5,
                       is_fraud: false,
                       score_details : {
                         'email': 
