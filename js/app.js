@@ -33,10 +33,10 @@ var map;
         ];
 
         $scope.splitfiveNum = function(num){
-          var spli = num/4;
+          var spli = Math.floor(num/4);
           var subt = Math.floor(spli * 48 / 100);
           var eachv = spli - subt;
-          var arr = [eachv,eachv,eachv,eachv];
+          var arr = [eachv,eachv,eachv,eachv+(num%4)];
           for(i=0;i<4;i++){
             var ind = Math.floor(Math.random() * 4);
             arr[ind] = arr[ind] + subt;
