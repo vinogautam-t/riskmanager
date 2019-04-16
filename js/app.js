@@ -26,17 +26,17 @@ var map;
         });
 
         $scope.transactionData = [
-          {type: 'Reward Reservation Night', tcount: 0, mcount: 0, avg: 7},
-          {type: 'Profile Change', tcount: 0, mcount: 0, avg: 8},
-          {type: 'Fraudulent Email', tcount: 0, mcount: 0, avg: 9},
-          {type: 'Phone Number Change', tcount: 0, mcount: 0, avg: 7}
+          {type: 'Reward Reservation Night', tcount: 8, mcount: 5, avg: 7},
+          {type: 'Profile Change', tcount: 5, mcount: 3, avg: 8},
+          {type: 'Fraudulent Email', tcount: 4, mcount: 2, avg: 9},
+          {type: 'Phone Number Change', tcount: 3, mcount: 1, avg: 7}
         ];
 
         $scope.splitfiveNum = function(num){
           var spli = num/4;
           var subt = Math.floor(spli * 48 / 100);
           var eachv = spli - subt;
-          var arr = [eachv,eachv,eachv,eachv,eachv];
+          var arr = [eachv,eachv,eachv,eachv];
           for(i=0;i<4;i++){
             var ind = Math.floor(Math.random() * 4);
             arr[ind] = arr[ind] + subt;
@@ -75,7 +75,7 @@ var map;
 
           angular.forEach($scope.transactionData, function(v,k){
             v.tcount = cnt1[k];
-            v.mcount = cnt2[k];
+            //v.mcount = cnt2[k];
           });
         };
 
